@@ -9,12 +9,18 @@ install:
   - echo y | android update sdk -u -a -t extra-android-m2repository
 android:
   components:
+    - tools
+    - platform-tools
+    - tools
     - build-tools-27.1.0
     - android-27
-    - extra
+    - extra-google-m2repository
+    - extra-android-m2repository
   licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 script:
   - ./gradlew check
+before_install:
+  - yes | sdkmanager "platforms;android-27"
