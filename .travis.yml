@@ -1,0 +1,20 @@
+language: android
+jdk: oraclejdk8
+install:
+  - echo y | android update sdk -u -a -t tools
+  - echo y | android update sdk -u -a -t platform-tools
+  - echo y | android update sdk -u -a -t build-tools-27.1.0
+  - echo y | android update sdk -u -a -t android-27
+  - echo y | android update sdk -u -a -t extra-google-m2repository
+  - echo y | android update sdk -u -a -t extra-android-m2repository
+android:
+  components:
+    - build-tools-27.1.0
+    - android-27
+    - extra
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+script:
+  - ./gradlew check
