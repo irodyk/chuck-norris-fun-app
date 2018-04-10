@@ -1,0 +1,15 @@
+apply plugin: 'kotlin'
+
+configurations.all {
+    resolutionStrategy {
+        force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    }
+}
+
+dependencies {
+    implementation domainLib.values()
+    testImplementation domainTest.values()
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
