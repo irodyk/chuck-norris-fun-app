@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -19,16 +21,28 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
-        quiet true
-        abortOnError false
-        ignoreWarnings true
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+        test.java.srcDirs += 'src/test/kotlin'
     }
 }
 
 dependencies {
+    def appDependencies = rootProject.ext.mainApp
+    def unitTestDependencies = rootProject.ext.unitTesting
+
     implementation project(':databoundary')
 
-    implementation dataLib.values()
-    testImplementation dataTest.values()
+    //Application dependencies
+    implementation appDependencies.design
+    implementation appDependencies.rxJava
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.retrofit2
+    implementation appDependencies.retrofit2GsonConverter
+
+    //Unit/Integration tests dependencies
+    testImplementation unitTestDependencies.junit
+    testImplementation unitTestDependencies.mockito
 }

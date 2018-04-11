@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply from: 'gradleScript/dependencies.gradle'
 buildscript {
     ext.kotlin_version = '1.1.51'
     repositories {
@@ -49,3 +48,5 @@ task runUnitTests(dependsOn: ['runDomainUnitTests', 'runDataUnitTests']) {
 task runAcceptanceTests(dependsOn: [':app:connectedAndroidTest']) {
     description 'Run application acceptance tests.'
 }
+
+apply from: 'config/dependencies.gradle'
