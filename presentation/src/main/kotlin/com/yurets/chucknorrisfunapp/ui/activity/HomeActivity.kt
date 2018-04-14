@@ -5,7 +5,11 @@ import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.view.MenuItem
 import android.view.View
+import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
 import com.yurets.chucknorrisfunapp.R
+import com.yurets.chucknorrisfunapp.di.component.ApplicationComponent
+import com.yurets.chucknorrisfunapp.di.component.DaggerActivityComponent
+import com.yurets.chucknorrisfunapp.di.module.ActivityModule
 import com.yurets.chucknorrisfunapp.ui.abs.BaseActivity
 import kotlinx.android.synthetic.main.bottom_hidden_navigation_bar.*
 
@@ -13,9 +17,9 @@ import kotlinx.android.synthetic.main.bottom_hidden_navigation_bar.*
 class HomeActivity : BaseActivity(),
         BottomNavigationView.OnNavigationItemSelectedListener {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
@@ -40,5 +44,13 @@ class HomeActivity : BaseActivity(),
             else -> throw IllegalArgumentException("Menu item id is invalid")
         }
         return true
+    }
+
+    override fun initializeInjector(applicationComponent: ApplicationComponent) {
+        DaggerActivityComponent.builder()
+                .applicationComponent(applicationComponent)
+                .activityModule(ActivityModule())
+                .build()
+                .inject(this)
     }
 }
