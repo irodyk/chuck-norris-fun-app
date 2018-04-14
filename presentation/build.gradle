@@ -83,5 +83,6 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.androidAnnotations
 
     //Development dependencies
-    debugImplementation devDependencies.leakCanary
+    debugImplementation devDependencies.leakCanaryDebug
+    releaseImplementation devDependencies.leakCanaryRelease
 }

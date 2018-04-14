@@ -2,6 +2,9 @@ package com.yurets.chucknorrisfunapp.ui.abs
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import com.squareup.leakcanary.RefWatcher
+import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
+
 
 abstract class BaseFragment : Fragment() {
 
@@ -30,5 +33,10 @@ abstract class BaseFragment : Fragment() {
             return true
         }
         return false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity?.application as ChuckNorrisFunApp).leakRefWatcher.watch(this)
     }
 }

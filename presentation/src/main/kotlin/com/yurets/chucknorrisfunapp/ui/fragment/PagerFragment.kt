@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.ui.abs.BaseFragment
 
-class JokeFragment : BaseFragment() {
+class PagerFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-            inflater.inflate(R.layout.fragment_joke, container, false);
+            inflater.inflate(R.layout.fragment_pager, container, false);
 }
