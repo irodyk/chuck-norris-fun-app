@@ -2,7 +2,6 @@ package com.yurets.chucknorrisfunapp.ui.abs
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import com.squareup.leakcanary.RefWatcher
 import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
 
 

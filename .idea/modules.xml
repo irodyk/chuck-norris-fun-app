@@ -5,12 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Chuck Norris Fun App.iml" filepath="$PROJECT_DIR$/.idea/Chuck Norris Fun App.iml" />
       <module fileurl="file://$PROJECT_DIR$/ChuckNorrisFunApp.iml" filepath="$PROJECT_DIR$/ChuckNorrisFunApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
-      <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
-      <module fileurl="file://$PROJECT_DIR$/databoundary/databoundary.iml" filepath="$PROJECT_DIR$/databoundary/databoundary.iml" />
       <module fileurl="file://$PROJECT_DIR$/databoundary/databoundary.iml" filepath="$PROJECT_DIR$/databoundary/databoundary.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />
       <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />
     </modules>
   </component>
