@@ -26,7 +26,7 @@ class HomeActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        addFragment(R.id.container_main, PagerFragment())
+        setFragment(R.id.container_main, PagerFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
 
@@ -45,9 +45,9 @@ class HomeActivity : BaseActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         when (item.itemId) {
-            R.id.action_full_list -> replaceFragment(R.id.container_main, PagerFragment())
-            R.id.action_favorites -> replaceFragment(R.id.container_main, FavoriteFragment())
-            R.id.action_rating -> replaceFragment(R.id.container_main, RatingFragment())
+            R.id.action_full_list -> setFragment(R.id.container_main, PagerFragment())
+            R.id.action_favorites -> setFragment(R.id.container_main, FavoriteFragment())
+            R.id.action_rating -> setFragment(R.id.container_main, RatingFragment())
             else -> throw IllegalArgumentException("Menu item id is invalid")
         }
         return true

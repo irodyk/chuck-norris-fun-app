@@ -6,11 +6,17 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.yurets.chucknorrisfunapp.ui.fragment.JokePagerFragment
 import com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel
 
-class JokePagerAdapter(fm : FragmentManager, private var jokes : MutableList<JokeViewModel>)
+class JokePagerAdapter(private val fm : FragmentManager, private var jokes : MutableList<JokeViewModel>)
     : FragmentStatePagerAdapter(fm) {
 
+    lateinit var fragments : MutableList<JokePagerFragment>
+
     override fun getItem(position: Int): Fragment {
-        return JokePagerFragment.newInstance( jokes[position])
+        var fragment = fm.findFragmentByTag(position.toString())
+        if(fragment == null){
+            fragment = JokePagerFragment.newInstance( jokes[position])
+        }
+        return fragment
     }
 
     override fun getCount(): Int {
