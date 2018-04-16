@@ -23,9 +23,14 @@ class PagerFragment : BaseFragment() {
         list.add(JokeViewModel(15, "joke 15", 4, 4))
         list.add(JokeViewModel(22, "joke 22", 4, 4))
         list.add(JokeViewModel(5, "joke 5", 4, 4))
+        list.add(JokeViewModel(12, "joke 12", 4, 4))
+        list.add(JokeViewModel(13, "joke 13", 4, 4))
+        list.add(JokeViewModel(3, "joke 3", 4, 4))
+        list.add(JokeViewModel(9, "joke 9", 4, 4))
         list.sort()
 
-        rootView.jokePager.adapter = JokePagerAdapter(fragmentManager!!, list)
+        rootView.jokePager.adapter = JokePagerAdapter(childFragmentManager, list)
+        rootView.jokePager.offscreenPageLimit = JokePagerAdapter.OFFSET_LIMIT
 
         return rootView
     }
