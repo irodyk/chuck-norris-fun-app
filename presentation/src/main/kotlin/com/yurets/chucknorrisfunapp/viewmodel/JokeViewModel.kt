@@ -3,14 +3,14 @@ package com.yurets.chucknorrisfunapp.viewmodel
 import android.os.Parcel
 import android.os.Parcelable
 
-data class JokeViewModel(val id: Int, val text: String, val userVote: Int, val overallRating: Int)
+data class JokeViewModel(val id: Int, val text: String, val userVote: Int, val overallRating: Float)
     : Parcelable, Comparable<JokeViewModel>{
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
             parcel.readInt(),
-            parcel.readInt())
+            parcel.readFloat())
 
     override fun compareTo(other: JokeViewModel): Int {
         return id.compareTo(other.id)
@@ -20,7 +20,7 @@ data class JokeViewModel(val id: Int, val text: String, val userVote: Int, val o
         parcel.writeInt(id)
         parcel.writeString(text)
         parcel.writeInt(userVote)
-        parcel.writeInt(overallRating)
+        parcel.writeFloat(overallRating)
     }
 
     override fun describeContents(): Int {

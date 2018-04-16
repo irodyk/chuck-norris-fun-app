@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="joke"
             type="com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel" />
     </data>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_screen_margin"
+            android:text="@{`# ` + joke.id}" />
+
+        <RatingBar
+            android:id="@+id/ratingBarJokeOverallRating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_screen_margin"
+            android:layout_marginTop="@dimen/default_screen_margin"
+            android:max="5"
+            android:numStars="5"
+            android:rating="@{joke.overallRating}"
+            android:progressTint="@color/orange_light"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:stepSize="0.01"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/textJokeOverallRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/rating_text_margin_top"
+            android:text="@{`` + joke.overallRating}"
+            app:layout_constraintTop_toBottomOf="@id/ratingBarJokeOverallRating"
+            app:layout_constraintEnd_toEndOf="@id/ratingBarJokeOverallRating"
+            app:layout_constraintStart_toStartOf="@id/ratingBarJokeOverallRating" />
+
+        <TextView
+            android:id="@+id/textJoke"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{joke.text}"
@@ -19,6 +53,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/ratingBarJokeUserVote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/rating_bar_margin_bottom"
+            android:max="5"
+            android:numStars="5"
+            android:rating="@{joke.userVote}"
+            android:progressTint="@color/orange_light"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:stepSize="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
