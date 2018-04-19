@@ -62,6 +62,8 @@ dependencies {
 
     //Compile time dependencies
     kapt appDependencies.daggerCompiler
+    kapt appDependencies.daggerAndroidProcessor
+    kapt appDependencies.aacCompiler
     compileOnly appDependencies.javaxAnnotation
     compileOnly appDependencies.javaxInject
 
@@ -73,11 +75,16 @@ dependencies {
     implementation appDependencies.rxAndroid
     implementation appDependencies.rxKotlin
     implementation appDependencies.dagger
+    implementation appDependencies.daggerSupport
     implementation appDependencies.androidAnnotations
+    implementation appDependencies.aacExtensions
+    implementation appDependencies.viewModel
+    implementation appDependencies.liveData
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockito
+    testImplementation unitTestDependencies.aacCoreTest
 
     //Acceptance tests dependencies
     androidTestImplementation acceptanceTestDependencies.testRunner

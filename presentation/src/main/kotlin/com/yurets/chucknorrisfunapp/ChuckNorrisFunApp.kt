@@ -1,15 +1,19 @@
 package com.yurets.chucknorrisfunapp
 
+import android.app.Activity
 import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
-import com.yurets.chucknorrisfunapp.di.component.ApplicationComponent
 import com.yurets.chucknorrisfunapp.di.component.DaggerApplicationComponent
-import com.yurets.chucknorrisfunapp.di.module.ApplicationModule
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class ChuckNorrisFunApp : Application() {
+class ChuckNorrisFunApp : Application(), HasActivityInjector {
 
-    lateinit var applicationComponent: ApplicationComponent
+    @Inject
+    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
     lateinit var leakRefWatcher: RefWatcher
 
     override fun onCreate() {
@@ -24,9 +28,9 @@ class ChuckNorrisFunApp : Application() {
     }
 
     private fun initializeInjector() {
-        this.applicationComponent = DaggerApplicationComponent
-                .builder()
-                .applicationModule(ApplicationModule(this))
-                .build()
+        DaggerApplicationComponent.create()
+                .inject(this)
     }
+
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingActivityInjector
 }

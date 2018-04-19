@@ -17,6 +17,7 @@ dependencies {
     def unitTestDependencies = rootProject.ext.unitTesting
 
     //Application dependencies
+    implementation appDependencies.javaxInject
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
     implementation appDependencies.rxKotlin

@@ -3,26 +3,35 @@ package com.yurets.chucknorrisfunapp.ui.activity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.app.Fragment
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import com.yurets.chucknorrisfunapp.R
-import com.yurets.chucknorrisfunapp.di.component.ApplicationComponent
-import com.yurets.chucknorrisfunapp.di.component.DaggerActivityComponent
-import com.yurets.chucknorrisfunapp.di.module.ActivityModule
 import com.yurets.chucknorrisfunapp.ui.abs.BaseActivity
 import com.yurets.chucknorrisfunapp.ui.fragment.FavoriteFragment
 import com.yurets.chucknorrisfunapp.ui.fragment.PagerFragment
 import com.yurets.chucknorrisfunapp.ui.fragment.RatingFragment
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.bottom_hidden_navigation_bar.*
+import javax.inject.Inject
 
 
-class HomeActivity : BaseActivity(),
-        BottomNavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigationView.OnNavigationItemSelectedListener {
+
+    @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return fragmentInjector
+    }
 
     private lateinit var bottomSheetBehaviour : BottomSheetBehavior<LinearLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
@@ -51,13 +60,5 @@ class HomeActivity : BaseActivity(),
             else -> throw IllegalArgumentException("Menu item id is invalid")
         }
         return true
-    }
-
-    override fun initializeInjector(applicationComponent: ApplicationComponent) {
-        DaggerActivityComponent.builder()
-                .applicationComponent(applicationComponent)
-                .activityModule(ActivityModule())
-                .build()
-                .inject(this)
     }
 }

@@ -1,15 +1,21 @@
 package com.yurets.chucknorrisfunapp.di.component
 
-import android.app.Application
-import android.content.Context
+import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
+import com.yurets.chucknorrisfunapp.di.module.ViewModelFactoryModule
+import com.yurets.chucknorrisfunapp.di.module.ViewModelModule
 import com.yurets.chucknorrisfunapp.di.module.ApplicationModule
+import com.yurets.chucknorrisfunapp.di.module.HomeActivityModule
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(ApplicationModule::class))
-interface ApplicationComponent {
+@Component(modules = arrayOf(
+        ApplicationModule::class,
+        ViewModelFactoryModule::class,
+        ViewModelModule::class,
+        HomeActivityModule::class
+))
 
-    fun application(): Application
-    fun context(): Context
+interface ApplicationComponent {
+    fun inject(app: ChuckNorrisFunApp)
 }

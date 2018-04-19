@@ -4,26 +4,20 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.yurets.chucknorrisfunapp.ui.fragment.JokePagerFragment
-import com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
+import com.yurets.domain.model.Joke
 
-class JokePagerAdapter(fm : FragmentManager, private var jokes : MutableList<JokeViewModel>)
-    : FragmentStatePagerAdapter(fm) {
+const val OFFSET_LIMIT = 5
 
-    companion object {
-        const val OFFSET_LIMIT = 5
-    }
+class JokePagerAdapter(fm : FragmentManager) : FragmentStatePagerAdapter(fm) {
+
+    var jokes : List<JokePagerViewModel.JokeViewModelItem> = emptyList()
 
     override fun getItem(position: Int): Fragment {
-        return JokePagerFragment.newInstance( jokes[position])
+        return JokePagerFragment.newInstance(jokes[position])
     }
 
     override fun getCount(): Int {
         return jokes.size
-    }
-
-    fun addJokes(newJokes : MutableList<JokeViewModel>){
-        jokes.addAll(newJokes)
-        jokes.sort()
-        notifyDataSetChanged()
     }
 }

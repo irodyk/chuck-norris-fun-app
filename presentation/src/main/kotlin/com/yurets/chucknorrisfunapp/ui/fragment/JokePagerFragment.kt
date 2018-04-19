@@ -11,21 +11,24 @@ import com.yurets.chucknorrisfunapp.BR
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.databinding.FragmentPagerJokeItemBinding
 import com.yurets.chucknorrisfunapp.ui.abs.BaseFragment
-import com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel
-
+import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
 
 class JokePagerFragment: BaseFragment() {
 
-    companion object {
-        const val JOKE_KEY = "joke"
+    private lateinit var jokeVmItem: JokePagerViewModel.JokeViewModelItem
 
-        fun newInstance(jokeViewModel: JokeViewModel?) : JokePagerFragment {
-            val args = Bundle()
-            args.putParcelable(JOKE_KEY, jokeViewModel)
+    companion object {
+
+        fun newInstance(jokeVmItem : JokePagerViewModel.JokeViewModelItem) : JokePagerFragment {
             val fragment = JokePagerFragment()
-            fragment.arguments = args
+            fragment.jokeVmItem = jokeVmItem
             return fragment
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,8 +36,7 @@ class JokePagerFragment: BaseFragment() {
                 inflater, R.layout.fragment_pager_joke_item, container , false)
         val rootView : View = binding.root
 
-        val joke = arguments!!.get(JOKE_KEY)
-        binding.setVariable(BR.joke, joke)
+        binding.setVariable(BR.jokeVmItem, jokeVmItem)
         binding.executePendingBindings()
 
         return rootView

@@ -1,18 +1,11 @@
 package com.yurets.chucknorrisfunapp.ui.abs
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
 import com.yurets.chucknorrisfunapp.di.component.ApplicationComponent
 
 
 abstract class BaseActivity : AppCompatActivity(){
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        initializeInjector((application as ChuckNorrisFunApp).applicationComponent)
-        super.onCreate(savedInstanceState)
-    }
 
     protected fun setFragment(containerViewId: Int, fragment: Fragment) {
         val backStateName = fragment.javaClass.simpleName
@@ -34,6 +27,4 @@ abstract class BaseActivity : AppCompatActivity(){
             super.onBackPressed()
         }
     }
-
-    protected abstract fun initializeInjector(applicationComponent: ApplicationComponent)
 }

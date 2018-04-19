@@ -1,37 +1,81 @@
 package com.yurets.chucknorrisfunapp.ui.fragment
 
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.adapter.JokePagerAdapter
+import com.yurets.chucknorrisfunapp.adapter.OFFSET_LIMIT
 import com.yurets.chucknorrisfunapp.ui.abs.BaseFragment
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import com.yurets.chucknorrisfunapp.viewmodel.state.*
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pager.view.*
+import javax.inject.Inject
 
 class PagerFragment : BaseFragment() {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var viewModel: JokePagerViewModel
+
+    private val jokePagerAdapter by lazy { JokePagerAdapter(childFragmentManager) }
+    private var isLoading = false
+
+    private val stateObserver = Observer<JokePagerState> { state ->
+        state?.let {
+            when (state) {
+                is DefaultState -> {
+                    isLoading = false
+                    jokePagerAdapter.jokes = it.data
+                    jokePagerAdapter.notifyDataSetChanged()
+                }
+                is LoadingState -> {
+                    isLoading = true
+                }
+                is PaginatingState -> {
+                    isLoading = true
+                }
+                is ErrorState -> {
+                    isLoading = false
+                }
+            }
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(JokePagerViewModel::class.java)
+        observeViewModel()
+        savedInstanceState?.let { viewModel.restoreJokeList() } ?: viewModel.updateJokeList()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val rootView = inflater.inflate(R.layout.fragment_pager, container , false)
 
-        val list = mutableListOf<JokeViewModel>()
-        list.add(JokeViewModel(2, "joke 2", 4, 4.23f))
-        list.add(JokeViewModel(4, "joke 4", 4, 3.22f))
-        list.add(JokeViewModel(6, "joke 6", 4, 4.01f))
-        list.add(JokeViewModel(1, "joke 1", 4, 4.7f))
-        list.add(JokeViewModel(15, "joke 15", 4, 1.9f))
-        list.add(JokeViewModel(22, "joke 22", 4, 4f))
-        list.add(JokeViewModel(5, "joke 5", 4, 4f))
-        list.add(JokeViewModel(12, "joke 12", 4, 4f))
-        list.add(JokeViewModel(13, "joke 13", 4, 4f))
-        list.add(JokeViewModel(3, "joke 3", 4, 4f))
-        list.add(JokeViewModel(9, "joke 9", 4, 4f))
-        list.sort()
-
-        rootView.jokePager.adapter = JokePagerAdapter(childFragmentManager, list)
-        rootView.jokePager.offscreenPageLimit = JokePagerAdapter.OFFSET_LIMIT
+        rootView.jokePager.adapter = jokePagerAdapter
+        rootView.jokePager.offscreenPageLimit = OFFSET_LIMIT
 
         return rootView
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.stateLiveData.removeObserver(stateObserver)
+    }
+
+    private fun observeViewModel() {
+        viewModel.stateLiveData.observe(this, stateObserver)
+    }
+
 }

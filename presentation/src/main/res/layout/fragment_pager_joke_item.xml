@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="joke"
-            type="com.yurets.chucknorrisfunapp.viewmodel.JokeViewModel" />
+            name="jokeVmItem"
+            type="com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel.JokeViewModelItem" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_screen_margin"
-            android:text="@{`# ` + joke.id}" />
+            android:text="@{`# ` + jokeVmItem.id}" />
 
         <RatingBar
             android:id="@+id/ratingBarJokeOverallRating"
@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/default_screen_margin"
             android:max="5"
             android:numStars="5"
-            android:rating="@{joke.overallRating}"
+            android:rating="@{jokeVmItem.overallRating}"
             android:progressTint="@color/orange_light"
             android:secondaryProgressTint="@android:color/transparent"
             android:stepSize="0.01"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/rating_text_margin_top"
-            android:text="@{`` + joke.overallRating}"
+            android:text="@{`` + jokeVmItem.overallRating}"
             app:layout_constraintTop_toBottomOf="@id/ratingBarJokeOverallRating"
             app:layout_constraintEnd_toEndOf="@id/ratingBarJokeOverallRating"
             app:layout_constraintStart_toStartOf="@id/ratingBarJokeOverallRating" />
@@ -48,7 +48,7 @@
             android:id="@+id/textJoke"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{joke.text}"
+            android:text="@{jokeVmItem.text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
             android:layout_marginBottom="@dimen/rating_bar_margin_bottom"
             android:max="5"
             android:numStars="5"
-            android:rating="@{joke.userVote}"
+            android:rating="@{jokeVmItem.userVote}"
             android:progressTint="@color/orange_light"
             android:secondaryProgressTint="@android:color/transparent"
             android:stepSize="1"

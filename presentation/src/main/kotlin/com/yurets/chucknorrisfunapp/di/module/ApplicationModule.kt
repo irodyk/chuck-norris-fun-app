@@ -1,23 +1,23 @@
 package com.yurets.chucknorrisfunapp.di.module
 
-import android.app.Application
-import android.content.Context
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Named
+
+const val SCHEDULER_MAIN_THREAD = "mainThread"
+const val SCHEDULER_IO = "io"
 
 @Module
-class ApplicationModule(private val application: Application) {
+class ApplicationModule() {
 
     @Provides
-    @Singleton
-    internal fun providesApplication(): Application {
-        return application
-    }
+    @Named(SCHEDULER_MAIN_THREAD)
+    fun provideAndroidMainThreadScheduler() : Scheduler = AndroidSchedulers.mainThread()
 
     @Provides
-    @Singleton
-    internal fun provideApplicationContext(): Context {
-        return application
-    }
+    @Named(SCHEDULER_IO)
+    fun provideIoScheduler() : Scheduler = Schedulers.io()
 }
