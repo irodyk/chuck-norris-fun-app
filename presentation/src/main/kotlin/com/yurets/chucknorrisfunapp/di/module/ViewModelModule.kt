@@ -1,7 +1,9 @@
 package com.yurets.chucknorrisfunapp.di.module
 
 import android.arch.lifecycle.ViewModel
-import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.AllJokesViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.FavoriteViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.RatingViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -17,6 +19,16 @@ internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
 abstract class ViewModelModule {
     @Binds
     @IntoMap
-    @ViewModelKey(JokePagerViewModel::class)
-    abstract fun bindCryptoListViewModel(pagerViewModel: JokePagerViewModel) : ViewModel
+    @ViewModelKey(AllJokesViewModel::class)
+    abstract fun bindAllJokesViewModel(allJokesViewModel: AllJokesViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoriteViewModel::class)
+    abstract fun bindFavoriteViewModel(favoriteViewModel: FavoriteViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RatingViewModel::class)
+    abstract fun bindRatingViewModel(ratingViewModel: RatingViewModel) : ViewModel
 }

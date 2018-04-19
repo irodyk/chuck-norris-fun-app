@@ -4,7 +4,7 @@ import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
 import com.yurets.chucknorrisfunapp.di.module.ViewModelFactoryModule
 import com.yurets.chucknorrisfunapp.di.module.ViewModelModule
 import com.yurets.chucknorrisfunapp.di.module.ApplicationModule
-import com.yurets.chucknorrisfunapp.di.module.HomeActivityModule
+import com.yurets.chucknorrisfunapp.di.module.activity.HomeActivityModule
 import dagger.Component
 import javax.inject.Singleton
 

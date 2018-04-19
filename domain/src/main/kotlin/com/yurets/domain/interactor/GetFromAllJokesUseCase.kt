@@ -4,7 +4,7 @@ import com.yurets.domain.model.Joke
 import io.reactivex.Single
 import javax.inject.Inject
 
-class JokeListUseCase @Inject constructor(){
+class GetFromAllJokesUseCase @Inject constructor(){
 
 
     fun getJokeList(page: Int): Single<List<Joke>> {
@@ -25,6 +25,4 @@ class JokeListUseCase @Inject constructor(){
 
         return Single.just(list)
     }
-
-
 }

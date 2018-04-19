@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.ui.abs.BaseActivity
 import com.yurets.chucknorrisfunapp.ui.fragment.FavoriteFragment
-import com.yurets.chucknorrisfunapp.ui.fragment.PagerFragment
+import com.yurets.chucknorrisfunapp.ui.fragment.AllJokesFragment
 import com.yurets.chucknorrisfunapp.ui.fragment.RatingFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -35,7 +35,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setFragment(R.id.container_main, PagerFragment())
+        setFragment(R.id.container_main, AllJokesFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
 
@@ -54,7 +54,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         when (item.itemId) {
-            R.id.action_full_list -> setFragment(R.id.container_main, PagerFragment())
+            R.id.action_full_list -> setFragment(R.id.container_main, AllJokesFragment())
             R.id.action_favorites -> setFragment(R.id.container_main, FavoriteFragment())
             R.id.action_rating -> setFragment(R.id.container_main, RatingFragment())
             else -> throw IllegalArgumentException("Menu item id is invalid")

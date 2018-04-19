@@ -5,7 +5,7 @@
     <data>
         <variable
             name="jokeVmItem"
-            type="com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel.JokeViewModelItem" />
+            type="com.yurets.chucknorrisfunapp.viewmodel.AllJokesViewModel.JokeItem" />
     </data>
 
     <android.support.constraint.ConstraintLayout

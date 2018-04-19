@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.adapter.JokePagerAdapter
 import com.yurets.chucknorrisfunapp.adapter.OFFSET_LIMIT
@@ -13,26 +12,26 @@ import com.yurets.chucknorrisfunapp.ui.abs.BaseFragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import com.yurets.chucknorrisfunapp.viewmodel.state.*
+import com.yurets.chucknorrisfunapp.viewmodel.*
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pager.view.*
 import javax.inject.Inject
 
-class PagerFragment : BaseFragment() {
+class AllJokesFragment : BaseFragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: JokePagerViewModel
+    private lateinit var viewModel: AllJokesViewModel
 
     private val jokePagerAdapter by lazy { JokePagerAdapter(childFragmentManager) }
     private var isLoading = false
 
-    private val stateObserver = Observer<JokePagerState> { state ->
-        state?.let {
+    private val stateObserver = Observer<State<AllJokesViewModel.JokeItem>> { state ->
+        state.let {
             when (state) {
                 is DefaultState -> {
                     isLoading = false
-                    jokePagerAdapter.jokes = it.data
+                    jokePagerAdapter.jokes = it!!.data
                     jokePagerAdapter.notifyDataSetChanged()
                 }
                 is LoadingState -> {
@@ -55,7 +54,7 @@ class PagerFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(JokePagerViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(AllJokesViewModel::class.java)
         observeViewModel()
         savedInstanceState?.let { viewModel.restoreJokeList() } ?: viewModel.updateJokeList()
     }
@@ -71,11 +70,10 @@ class PagerFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.stateLiveData.removeObserver(stateObserver)
+        viewModel.liveDataState.removeObserver(stateObserver)
     }
 
     private fun observeViewModel() {
-        viewModel.stateLiveData.observe(this, stateObserver)
+        viewModel.liveDataState.observe(this, stateObserver)
     }
-
 }

@@ -1,4 +1,4 @@
-package com.yurets.chucknorrisfunapp.di.module
+package com.yurets.chucknorrisfunapp.di.module.activity
 
 import android.app.Activity
 import com.yurets.chucknorrisfunapp.di.component.sub.HomeActivitySubcomponent

@@ -1,4 +1,4 @@
-package com.yurets.chucknorrisfunapp.ui.fragment
+package com.yurets.chucknorrisfunapp.ui.fragment.pager
 
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
@@ -11,16 +11,16 @@ import com.yurets.chucknorrisfunapp.BR
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.databinding.FragmentPagerJokeItemBinding
 import com.yurets.chucknorrisfunapp.ui.abs.BaseFragment
-import com.yurets.chucknorrisfunapp.viewmodel.JokePagerViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.AllJokesViewModel
 
-class JokePagerFragment: BaseFragment() {
+class JokePagerItemFragment: BaseFragment() {
 
-    private lateinit var jokeVmItem: JokePagerViewModel.JokeViewModelItem
+    private lateinit var jokeVmItem: AllJokesViewModel.JokeItem
 
     companion object {
 
-        fun newInstance(jokeVmItem : JokePagerViewModel.JokeViewModelItem) : JokePagerFragment {
-            val fragment = JokePagerFragment()
+        fun newInstance(jokeVmItem : AllJokesViewModel.JokeItem) : JokePagerItemFragment {
+            val fragment = JokePagerItemFragment()
             fragment.jokeVmItem = jokeVmItem
             return fragment
         }
