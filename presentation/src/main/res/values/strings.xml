@@ -4,4 +4,6 @@
     <string name="favorites">Favorites</string>
     <string name="rating">Rating</string>
     <string name="full_list">Full list</string>
+    <string name="search_hint_search_text">Search joke</string>
+    <string name="search_hint_search_number">Search by joke number</string>
 </resources>
