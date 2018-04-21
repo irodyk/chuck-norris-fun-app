@@ -52,7 +52,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+        closeBottomNavigationMenu()
         when (item.itemId) {
             R.id.action_full_list -> setFragment(R.id.container_main, AllJokesFragment())
             R.id.action_favorites -> setFragment(R.id.container_main, FavoriteFragment())
@@ -60,5 +60,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
             else -> throw IllegalArgumentException("Menu item id is invalid")
         }
         return true
+    }
+
+    fun closeBottomNavigationMenu(){
+        bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 }
