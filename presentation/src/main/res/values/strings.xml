@@ -4,6 +4,10 @@
     <string name="favorites">Favorites</string>
     <string name="rating">Rating</string>
     <string name="full_list">Full list</string>
-    <string name="search_hint_search_text">Search joke</string>
-    <string name="search_hint_search_number">Search by joke number</string>
+    <string name="search_hint_search_text">Joke text or number</string>
+    <string name="action_share_app">Share app</string>
+    <string name="action_rate_app">Rate app</string>
+    <string name="action_random_joke">Random joke</string>
+    <string name="action_search">Search joke text or number</string>
+    <string name="action_list_or_pager_view">Select view</string>
 </resources>

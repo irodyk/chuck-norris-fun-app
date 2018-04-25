@@ -1,15 +1,27 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="actionOverflowButtonStyle">@style/overFlow</item>
+        <item name="android:actionButtonStyle">@style/actionButtonStyle</item>
+        <item name="actionButtonStyle">@style/actionButtonStyle</item>
+
         <item name="android:windowFullscreen">true</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!-- Action bar themes -->
+    <style name="overFlow" parent="@style/Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more</item>
+    </style>
+
+    <style name="actionButtonStyle" parent="@style/Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:layout_marginTop">@dimen/action_bar_icon_margin</item>
+        <item name="android:layout_marginBottom">@dimen/action_bar_icon_margin</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
@@ -17,7 +18,9 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.bottom_hidden_navigation_bar.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
+import android.support.v7.widget.SearchView
 
 
 class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +37,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         setFragment(R.id.container_main, AllJokesFragment())
 
@@ -64,5 +70,59 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
 
     fun closeBottomNavigationMenu(){
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.queryHint = resources.getString(R.string.search_hint_search_text)
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                setMenuItemsVisibility(menu, searchItem, false)
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                setMenuItemsVisibility(menu, searchItem, true)
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.action_search -> {
+
+            }
+            R.id.action_list_or_pager_view -> {
+
+            }
+            R.id.action_random_joke -> {
+
+            }
+            R.id.action_share_app -> {
+
+            }
+            R.id.action_rate_app -> {
+
+            }
+            else -> return false
+        }
+
+        return true
+    }
+
+    private fun setMenuItemsVisibility(menu: Menu, exception: MenuItem, visible: Boolean) {
+        for (i in 0 until menu.size()) {
+            val item = menu.getItem(i)
+            if (item !== exception) item.isVisible = visible
+        }
     }
 }
