@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -50,6 +50,8 @@ android {
     }
 }
 
+//fix to resolve databinding library annotationProcessor usage instead of kapt. Has to be fixed in future by Google
+//configurations.maybeCreate("dataBindingAnnotationProcessor")
 dependencies {
     def appDependencies = rootProject.ext.mainApp
     def unitTestDependencies = rootProject.ext.unitTesting
@@ -64,6 +66,7 @@ dependencies {
     kapt appDependencies.daggerCompiler
     kapt appDependencies.daggerAndroidProcessor
     kapt appDependencies.aacCompiler
+//    dataBindingAnnotationProcessor appDependencies.databindingCompiler
     compileOnly appDependencies.javaxAnnotation
     compileOnly appDependencies.javaxInject
 
@@ -80,6 +83,8 @@ dependencies {
     implementation appDependencies.aacExtensions
     implementation appDependencies.viewModel
     implementation appDependencies.liveData
+    implementation appDependencies.aacNavigationFragment
+    implementation appDependencies.aacNavigationUi
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.junit
@@ -92,6 +97,7 @@ dependencies {
     androidTestImplementation acceptanceTestDependencies.espressoCore
     androidTestImplementation acceptanceTestDependencies.espressoIntents
     androidTestImplementation acceptanceTestDependencies.androidAnnotations
+    androidTestImplementation acceptanceTestDependencies.aacNavigationTesting
 
     //Development dependencies
     debugImplementation devDependencies.leakCanaryDebug

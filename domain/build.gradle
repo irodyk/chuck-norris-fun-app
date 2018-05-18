@@ -3,7 +3,7 @@ apply plugin: 'kotlin-kapt'
 
 configurations.all {
     resolutionStrategy {
-        force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+        force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     }
 }
 

@@ -10,4 +10,5 @@
     <string name="action_random_joke">Random joke</string>
     <string name="action_search">Search joke text or number</string>
     <string name="action_list_or_pager_view">Select view</string>
+    <string name="category">Categories</string>
 </resources>

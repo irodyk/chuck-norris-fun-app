@@ -1,29 +1,27 @@
 package com.yurets.chucknorrisfunapp.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.LinearLayout
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.yurets.chucknorrisfunapp.R
 import com.yurets.chucknorrisfunapp.ui.abs.BaseActivity
-import com.yurets.chucknorrisfunapp.ui.fragment.FavoriteFragment
-import com.yurets.chucknorrisfunapp.ui.fragment.AllJokesFragment
-import com.yurets.chucknorrisfunapp.ui.fragment.RatingFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.bottom_hidden_navigation_bar.*
+import kotlinx.android.synthetic.main.bottom_navigation_menu.*
 import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
-import android.support.v7.widget.SearchView
 
 
-class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
@@ -41,32 +39,43 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector, BottomNavigatio
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        setFragment(R.id.container_main, AllJokesFragment())
+        Navigation.findNavController(this, R.id.nav_host_fragment)
+                .navigate(R.id.all_jokes_fragment, null)
 
-        bottomNavigation.setOnNavigationItemSelectedListener(this)
+        bottomSheetBehaviour = BottomSheetBehavior.from(bottom_navigation_root) as BottomSheetBehavior
 
-        bottomSheetBehaviour = BottomSheetBehavior.from(bottomNavigationRoot) as BottomSheetBehavior
-        bottomSheetBehaviour.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+        initListeners()
 
-            }
+    }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+    fun initListeners(){
+        tv_action_category_title.setOnClickListener({
+            Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.rating_fragment, null) //create category fragment
+            closeBottomNavigationMenu()
+        })
 
-            }
+        tv_action_full_list_title.setOnClickListener({
+            Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.all_jokes_fragment, null)
+            closeBottomNavigationMenu()
+        })
+
+        tv_action_rating_title.setOnClickListener({
+            Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.action_all_jokes_fragment_to_rating_fragment, null)
+            closeBottomNavigationMenu()
+        })
+
+        tv_action_favorites_title.setOnClickListener({
+            Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.action_all_jokes_fragment_to_favorites_fragment, null)
+            closeBottomNavigationMenu()
         })
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        closeBottomNavigationMenu()
-        when (item.itemId) {
-            R.id.action_full_list -> setFragment(R.id.container_main, AllJokesFragment())
-            R.id.action_favorites -> setFragment(R.id.container_main, FavoriteFragment())
-            R.id.action_rating -> setFragment(R.id.container_main, RatingFragment())
-            else -> throw IllegalArgumentException("Menu item id is invalid")
-        }
-        return true
-    }
+    override fun onSupportNavigateUp()
+            = findNavController(R.id.nav_host_fragment).navigateUp()
 
     fun closeBottomNavigationMenu(){
         bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
