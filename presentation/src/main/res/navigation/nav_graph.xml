@@ -5,6 +5,16 @@
     app:startDestination="@+id/all_jokes_fragment">
 
     <fragment
+        android:id="@+id/category_fragment"
+        android:name="com.yurets.chucknorrisfunapp.ui.fragment.RatingFragment"
+        android:label="category_fragment"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_category_fragment_to_all_jokes_fragment"
+            app:popUpTo="@id/all_jokes_fragment"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/all_jokes_fragment"
         android:name="com.yurets.chucknorrisfunapp.ui.fragment.AllJokesFragment"
         android:label="all_jokes_fragment"

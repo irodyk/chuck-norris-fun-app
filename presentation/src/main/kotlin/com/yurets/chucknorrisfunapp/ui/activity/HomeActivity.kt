@@ -51,7 +51,7 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     fun initListeners(){
         tv_action_category_title.setOnClickListener({
             Navigation.findNavController(this, R.id.nav_host_fragment)
-                    .navigate(R.id.rating_fragment, null) //create category fragment
+                    .navigate(R.id.category_fragment, null)
             closeBottomNavigationMenu()
         })
 
