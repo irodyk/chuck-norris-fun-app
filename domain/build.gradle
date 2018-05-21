@@ -16,6 +16,8 @@ dependencies {
     def appDependencies = rootProject.ext.mainApp
     def unitTestDependencies = rootProject.ext.unitTesting
 
+    implementation project(':databoundary')
+
     //Application dependencies
     implementation appDependencies.javaxInject
     implementation appDependencies.rxJava

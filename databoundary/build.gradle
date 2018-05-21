@@ -15,8 +15,6 @@ dependencies {
     def appDependencies = rootProject.ext.mainApp
     def unitTestDependencies = rootProject.ext.unitTesting
 
-    implementation project(':domain')
-
     //Application dependencies
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid

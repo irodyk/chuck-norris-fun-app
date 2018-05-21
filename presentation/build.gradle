@@ -50,8 +50,6 @@ android {
     }
 }
 
-//fix to resolve databinding library annotationProcessor usage instead of kapt. Has to be fixed in future by Google
-//configurations.maybeCreate("dataBindingAnnotationProcessor")
 dependencies {
     def appDependencies = rootProject.ext.mainApp
     def unitTestDependencies = rootProject.ext.unitTesting
@@ -59,6 +57,7 @@ dependencies {
     def devDependencies = rootProject.ext.dev
 
     implementation project(':data')
+    implementation project(':databoundary')
     implementation project(':domain')
 
 
@@ -66,7 +65,6 @@ dependencies {
     kapt appDependencies.daggerCompiler
     kapt appDependencies.daggerAndroidProcessor
     kapt appDependencies.aacCompiler
-//    dataBindingAnnotationProcessor appDependencies.databindingCompiler
     compileOnly appDependencies.javaxAnnotation
     compileOnly appDependencies.javaxInject
 

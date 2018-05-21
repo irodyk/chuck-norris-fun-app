@@ -4,6 +4,7 @@ import com.yurets.chucknorrisfunapp.ChuckNorrisFunApp
 import com.yurets.chucknorrisfunapp.di.module.ViewModelFactoryModule
 import com.yurets.chucknorrisfunapp.di.module.ViewModelModule
 import com.yurets.chucknorrisfunapp.di.module.ApplicationModule
+import com.yurets.chucknorrisfunapp.di.module.RepositoryModule
 import com.yurets.chucknorrisfunapp.di.module.activity.HomeActivityModule
 import dagger.Component
 import javax.inject.Singleton
@@ -13,7 +14,8 @@ import javax.inject.Singleton
         ApplicationModule::class,
         ViewModelFactoryModule::class,
         ViewModelModule::class,
-        HomeActivityModule::class
+        HomeActivityModule::class,
+        RepositoryModule::class
 ))
 
 interface ApplicationComponent {
