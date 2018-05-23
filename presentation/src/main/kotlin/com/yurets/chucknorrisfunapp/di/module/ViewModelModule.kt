@@ -2,6 +2,7 @@ package com.yurets.chucknorrisfunapp.di.module
 
 import android.arch.lifecycle.ViewModel
 import com.yurets.chucknorrisfunapp.viewmodel.AllJokesViewModel
+import com.yurets.chucknorrisfunapp.viewmodel.CategoryViewModel
 import com.yurets.chucknorrisfunapp.viewmodel.FavoriteViewModel
 import com.yurets.chucknorrisfunapp.viewmodel.RatingViewModel
 import dagger.Binds
@@ -31,4 +32,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RatingViewModel::class)
     abstract fun bindRatingViewModel(ratingViewModel: RatingViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoryViewModel::class)
+    abstract fun bindCategoryViewModel(categoryViewModel: CategoryViewModel) : ViewModel
 }

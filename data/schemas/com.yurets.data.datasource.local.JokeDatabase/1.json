@@ -1,0 +1,57 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "e79720f8be8d1e2abad772f44a43ede4",
+    "entities": [
+      {
+        "tableName": "joke",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`jokeId` INTEGER NOT NULL, `category` TEXT NOT NULL, `text` TEXT NOT NULL, `userVote` INTEGER NOT NULL, `overallRating` REAL NOT NULL, PRIMARY KEY(`jokeId`))",
+        "fields": [
+          {
+            "fieldPath": "jokeId",
+            "columnName": "jokeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userVote",
+            "columnName": "userVote",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "overallRating",
+            "columnName": "overallRating",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "jokeId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e79720f8be8d1e2abad772f44a43ede4\")"
+    ]
+  }
+}

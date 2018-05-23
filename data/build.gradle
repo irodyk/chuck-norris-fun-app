@@ -14,6 +14,12 @@ android {
         versionCode globalConfiguration.getAt("androidVersionCode")
 
         multiDexEnabled true
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
 
     compileOptions {
@@ -34,6 +40,10 @@ dependencies {
 
     implementation project(':databoundary')
 
+    kapt appDependencies.roomCompiler
+    compileOnly appDependencies.javaxAnnotation
+    compileOnly appDependencies.javaxInject
+
     //Application dependencies
     implementation appDependencies.design
     implementation appDependencies.rxJava
@@ -41,8 +51,11 @@ dependencies {
     implementation appDependencies.rxKotlin
     implementation appDependencies.retrofit2
     implementation appDependencies.retrofit2GsonConverter
+    implementation appDependencies.roomRuntime
+    implementation appDependencies.roomRxJava
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockito
+    testImplementation unitTestDependencies.roomTest
 }

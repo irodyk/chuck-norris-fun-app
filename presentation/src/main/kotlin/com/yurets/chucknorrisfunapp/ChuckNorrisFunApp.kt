@@ -5,6 +5,8 @@ import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import com.yurets.chucknorrisfunapp.di.component.DaggerApplicationComponent
+import com.yurets.chucknorrisfunapp.di.module.ApplicationModule
+import com.yurets.chucknorrisfunapp.di.module.RepositoryModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -28,7 +30,10 @@ class ChuckNorrisFunApp : Application(), HasActivityInjector {
     }
 
     private fun initializeInjector() {
-        DaggerApplicationComponent.create()
+        DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .repositoryModule(RepositoryModule())
+                .build()
                 .inject(this)
     }
 

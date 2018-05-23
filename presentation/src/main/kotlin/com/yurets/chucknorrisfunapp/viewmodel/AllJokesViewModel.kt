@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import com.yurets.chucknorrisfunapp.di.module.SCHEDULER_IO
 import com.yurets.chucknorrisfunapp.di.module.SCHEDULER_MAIN_THREAD
 import com.yurets.domain.interactor.GetFromAllJokesUseCase
+import com.yurets.domain.interactor.PrePopulateDb
 import com.yurets.domain.model.Joke
 import io.reactivex.Scheduler
 import javax.inject.Inject
@@ -12,15 +13,17 @@ import javax.inject.Named
 
 class AllJokesViewModel
 @Inject constructor (private val getFromAllJokesUseCase: GetFromAllJokesUseCase,
+                     private val prePopulateDb: PrePopulateDb,
                      @Named(SCHEDULER_IO) val subscribeOnScheduler: Scheduler,
                      @Named(SCHEDULER_MAIN_THREAD) val observeOnScheduler: Scheduler)
     : ViewModel(){
 
-    data class JokeItem(val id: Int, val text: String, val userVote: Int, val overallRating: Float)
+    data class JokeItem(val id: Int, val category: String, val text: String, val userVote: Int, val overallRating: Float)
 
     val liveDataState =  MutableLiveData<State<JokeItem>>()
 
     init {
+        prePopulateDb.prePopulateDb()
         liveDataState.value = DefaultState(0, emptyList())
     }
 
@@ -53,7 +56,7 @@ class AllJokesViewModel
 
     private fun onJokeListReceived(jokeList: List<Joke>) {
 
-        val jokeItemList = jokeList.map { JokeItem(id = it.id, text = it.text,
+        val jokeItemList = jokeList.map { JokeItem(id = it.id, category = it.category, text = it.text,
                 userVote = it.userVote, overallRating = it.overallRating)  }
 
         val currentJokeList = obtainCurrentData().toMutableList()

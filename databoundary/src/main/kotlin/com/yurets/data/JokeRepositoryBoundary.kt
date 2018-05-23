@@ -1,14 +1,14 @@
 package com.yurets.data;
 
-import com.yurets.data.model.CategoryDataModel
 import com.yurets.data.model.JokeDataModel
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
 interface JokeRepositoryBoundary {
 
-    fun getAllJokesList() : Observable<MutableList<JokeDataModel>>
-    fun getFavoriteList() : Observable<MutableList<JokeDataModel>>
-    fun getRatingList() : Observable<MutableList<JokeDataModel>>
-    fun getCategoryList() : Observable<MutableList<CategoryDataModel>>
-    fun getListForCategory(category : CategoryDataModel) : Observable<MutableList<JokeDataModel>>
+    fun getAllJokesList() : Flowable<List<JokeDataModel>>
+    fun getFavoriteList() : Flowable<List<JokeDataModel>>
+    fun getRatingList() : Flowable<List<JokeDataModel>>
+    fun getCategoryList() : Flowable<List<String>>
+    fun getListForCategory(category : String) : Flowable<List<JokeDataModel>>
+    fun prePopulateDb(jokeList: List<JokeDataModel>)
 }

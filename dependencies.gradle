@@ -61,6 +61,7 @@ ext {
             aacCompiler             :    "android.arch.lifecycle:compiler:${lifecycleACCVersion}",
             roomRuntime             :    "android.arch.persistence.room:runtime:${persistenseAACVersion}",
             roomCompiler            :    "android.arch.persistence.room:compiler:${persistenseAACVersion}",
+            roomRxJava              :    "android.arch.persistence.room:rxjava2:${persistenseAACVersion}",
             aacPaging               :    "android.arch.paging:runtime:${pagingACCVersion}",
             aacNavigationFragment   :    "android.arch.navigation:navigation-fragment-ktx:$navigationAACVersion",
             aacNavigationUi         :    "android.arch.navigation:navigation-ui-ktx:$navigationAACVersion",
