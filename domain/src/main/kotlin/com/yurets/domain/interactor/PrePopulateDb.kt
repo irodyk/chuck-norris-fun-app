@@ -2,12 +2,16 @@ package com.yurets.domain.interactor
 
 import com.yurets.data.JokeRepositoryBoundary
 import com.yurets.data.model.JokeDataModel
+import io.reactivex.Maybe
 import javax.inject.Inject
 
 class PrePopulateDb @Inject constructor(private val jokeRepository: JokeRepositoryBoundary){
 
-    fun prePopulateDb() {
-        return jokeRepository.prePopulateDb(jokeList)
+    fun prePopulateDb() : Maybe<Int> {
+        return Maybe.fromCallable {
+            val recordsCount = jokeRepository.jokesCount()
+            if(recordsCount > 0) recordsCount else jokeRepository.prePopulateDb(jokeList).blockingGet()
+        }
     }
 
     private val jokeList : List<JokeDataModel> = mutableListOf(

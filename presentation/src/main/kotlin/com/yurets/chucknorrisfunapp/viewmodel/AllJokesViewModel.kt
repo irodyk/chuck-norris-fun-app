@@ -13,7 +13,6 @@ import javax.inject.Named
 
 class AllJokesViewModel
 @Inject constructor (private val getFromAllJokesUseCase: GetFromAllJokesUseCase,
-                     private val prePopulateDb: PrePopulateDb,
                      @Named(SCHEDULER_IO) val subscribeOnScheduler: Scheduler,
                      @Named(SCHEDULER_MAIN_THREAD) val observeOnScheduler: Scheduler)
     : ViewModel(){
@@ -23,7 +22,6 @@ class AllJokesViewModel
     val liveDataState =  MutableLiveData<State<JokeItem>>()
 
     init {
-        prePopulateDb.prePopulateDb()
         liveDataState.value = DefaultState(0, emptyList())
     }
 

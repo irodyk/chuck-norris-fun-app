@@ -7,12 +7,12 @@ data class Joke (val id: Int, val category: String, val text: String, val userVo
     object Mapper {
 
         val jokeMapper: (JokeDataModel) -> Joke = { jokeDataModel ->
-            Joke(id = jokeDataModel.id, category = jokeDataModel.category, text = jokeDataModel.text,
+            Joke(id = jokeDataModel.id, category = jokeDataModel.category, text = jokeDataModel.value,
                     userVote = jokeDataModel.userVote, overallRating = jokeDataModel.overallRating)
         }
 
         val jokeDataModelMapper: (Joke) -> JokeDataModel = { joke ->
-            JokeDataModel(id = joke.id, category = joke.category, text = joke.text,
+            JokeDataModel(id = joke.id, category = joke.category, value = joke.text,
                     userVote = joke.userVote, overallRating = joke.overallRating)
         }
     }

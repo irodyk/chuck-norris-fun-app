@@ -10,16 +10,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
-class RepositoryModule() {
 
-    @Provides
-    @Singleton
-    fun providesJokeDatabase(application: Application): JokeDatabase =
-            Room.databaseBuilder(application, JokeDatabase::class.java, "joke_db")
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
-                    .build()
+@Module
+class RepositoryModule {
 
     @Provides
     @Singleton
@@ -28,4 +21,11 @@ class RepositoryModule() {
     @Provides
     @Singleton
     fun providesJokeRepository(jokeDao: JokeDao): JokeRepositoryBoundary = JokeRepository(jokeDao)
+
+    @Provides
+    @Singleton
+    fun providesJokeDatabase(application: Application) : JokeDatabase =
+            Room.databaseBuilder(application.applicationContext, JokeDatabase::class.java, "joke_db")
+                .fallbackToDestructiveMigration()
+                .build()
 }

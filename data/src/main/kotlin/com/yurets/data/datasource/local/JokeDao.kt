@@ -7,6 +7,9 @@ import io.reactivex.Flowable
 @Dao
 interface JokeDao {
 
+    @Query("SELECT COUNT(*) FROM joke")
+    fun countJokes() : Int
+
     @Query("SELECT * FROM joke LIMIT :limit")
     fun queryJokes(limit: Int) : Flowable<List<JokeEntity>>
 
@@ -20,7 +23,7 @@ interface JokeDao {
     fun queryCategories(limit: Int) : Flowable<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertJokes(jokeEntities: List<JokeEntity>)
+    fun insertJokes(jokeEntities: List<JokeEntity>) : List<Long>
 
     @Update
     fun updateJokes(jokeEntities: List<JokeEntity>)

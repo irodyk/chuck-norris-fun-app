@@ -5,11 +5,20 @@ import com.yurets.data.datasource.local.JokeDao
 import com.yurets.data.datasource.local.entity.JokeEntity
 import com.yurets.data.model.JokeDataModel
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import javax.inject.Inject
 
 class JokeRepository @Inject constructor(val jokeDao: JokeDao) : JokeRepositoryBoundary {
-    override fun prePopulateDb(jokeList: List<JokeDataModel>) {
-        jokeDao.insertJokes(jokeList.map { JokeEntity.DataModelMapper.from(it) })
+
+
+    override fun jokesCount(): Int {
+        return jokeDao.countJokes()
+    }
+
+    override fun prePopulateDb(jokeList: List<JokeDataModel>) : Maybe<Int> {
+        return Maybe.just(jokeDao.insertJokes(jokeList
+                .map { JokeEntity.DataModelMapper.from(it) })
+                .size)
     }
 
     override fun getAllJokesList(): Flowable<List<JokeDataModel>> {

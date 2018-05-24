@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_root_view"
-    tools:context="com.yurets.chucknorrisfunapp.ui.activity.HomeActivity">
+    tools:context="com.yurets.chucknorrisfunapp.ui.activity.MainActivity">
 
     <!--Include top toolbar-->
     <include layout="@layout/toolbar" />

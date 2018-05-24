@@ -13,7 +13,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.view.ViewPager
-import com.yurets.chucknorrisfunapp.ui.activity.HomeActivity
+import com.yurets.chucknorrisfunapp.ui.activity.MainActivity
 import com.yurets.chucknorrisfunapp.viewmodel.*
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_pager.view.*
@@ -70,7 +70,7 @@ class AllJokesFragment : BaseFragment() {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
-                (activity as HomeActivity).closeBottomNavigationMenu()
+                (activity as MainActivity).closeBottomNavigationMenu()
             }
 
         })

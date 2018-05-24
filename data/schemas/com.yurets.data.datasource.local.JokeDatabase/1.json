@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e79720f8be8d1e2abad772f44a43ede4",
+    "identityHash": "712798b46553be2a2e04a69a7cbd1f6c",
     "entities": [
       {
         "tableName": "joke",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`jokeId` INTEGER NOT NULL, `category` TEXT NOT NULL, `text` TEXT NOT NULL, `userVote` INTEGER NOT NULL, `overallRating` REAL NOT NULL, PRIMARY KEY(`jokeId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`jokeId` INTEGER NOT NULL, `category` TEXT NOT NULL, `value` TEXT NOT NULL, `userVote` INTEGER NOT NULL, `overallRating` REAL NOT NULL, PRIMARY KEY(`jokeId`))",
         "fields": [
           {
             "fieldPath": "jokeId",
@@ -21,8 +21,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "text",
-            "columnName": "text",
+            "fieldPath": "value",
+            "columnName": "value",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -51,7 +51,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e79720f8be8d1e2abad772f44a43ede4\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"712798b46553be2a2e04a69a7cbd1f6c\")"
     ]
   }
 }

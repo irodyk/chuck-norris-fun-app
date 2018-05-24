@@ -2,14 +2,18 @@ package com.yurets.chucknorrisfunapp.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.yurets.chucknorrisfunapp.MainView
 import com.yurets.chucknorrisfunapp.R
+import com.yurets.chucknorrisfunapp.presenter.MainPresenter
 import com.yurets.chucknorrisfunapp.ui.abs.BaseActivity
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -21,9 +25,11 @@ import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 
-class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
+class MainActivity : BaseActivity(), MainView, HasSupportFragmentInjector {
 
     @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    @Inject lateinit var mainPresenter: MainPresenter
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentInjector
@@ -34,6 +40,9 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+
+        mainPresenter.prePopulateDb()
+
         setContentView(R.layout.activity_home)
 
         setSupportActionBar(toolbar)
@@ -72,6 +81,10 @@ class HomeActivity : BaseActivity(), HasSupportFragmentInjector {
                     .navigate(R.id.action_all_jokes_fragment_to_favorites_fragment, null)
             closeBottomNavigationMenu()
         })
+    }
+
+    override fun onError(msg: String?) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onSupportNavigateUp()
