@@ -36,12 +36,12 @@ allprojects {
     }
 }
 
-spotless {
-    kotlin {
-        target "**/*.kt"
-        ktlint(ktlintVersion)
-    }
-}
+//spotless {
+//    kotlin {
+//        target "**/*.kt"
+//        ktlint(ktlintVersion)
+//    }
+//}
 
 clean {
     delete rootProject.buildDir

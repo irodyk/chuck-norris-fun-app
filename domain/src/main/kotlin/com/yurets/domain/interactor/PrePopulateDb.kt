@@ -10,7 +10,8 @@ class PrePopulateDb @Inject constructor(private val jokeRepository: JokeReposito
     fun prePopulateDb() : Maybe<Int> {
         return Maybe.fromCallable {
             val recordsCount = jokeRepository.jokesCount()
-            if(recordsCount > 0) recordsCount else jokeRepository.prePopulateDb(jokeList).blockingGet()
+            if(recordsCount > 0) recordsCount
+            else jokeRepository.prePopulateDb(jokeList).blockingGet()
         }
     }
 

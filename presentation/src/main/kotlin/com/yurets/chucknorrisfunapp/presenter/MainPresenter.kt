@@ -24,7 +24,7 @@ class MainPresenter @Inject constructor (private val prePopulateDb: PrePopulateD
     }
 
     override fun dispose() {
-        disposables.forEach({it.dispose()})
+        disposables.forEach {it.dispose()}
     }
 
     fun prePopulateDb(){
