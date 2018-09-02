@@ -3,9 +3,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-androidExtensions {
-    experimental = true
-}
+//androidExtensions {
+//    experimental = true
+//}
 
 
 android {
@@ -75,6 +75,7 @@ dependencies {
 
     //Application dependencies
     implementation appDependencies.appCompat
+    implementation appDependencies.ktx
     implementation appDependencies.constraintLayout
     implementation appDependencies.design
     implementation appDependencies.rxJava
